@@ -1,0 +1,43 @@
+{
+  "name": "eslint-plugin-filenames",
+  "version": "0.0.1",
+  "description": "Eslint rule for consistent filenames.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && npm run unit-test --coverage && npm run check-coverage",
+    "lint": "eslint .",
+    "unit-test": "istanbul test --dir build/coverage _mocha test -- --recursive --reporter dot",
+    "check-coverage": "istanbul check-coverage --statement 100 --branch 100 --function 100 --lines 100",
+    "report-coverage-html": "istanbul report --dir  build/coverage html",
+    "coveralls": "cat ./build/coverage/lcov.info | coveralls"
+  },
+  "devDependencies": {
+    "chai": "1.10.0",
+    "eslint-tester": "0.4.0",
+    "istanbul": "0.3.5",
+    "mocha": "2.1.0",
+    "eslint": ">=0.9.0",
+    "coveralls": "2.11.2"
+  },
+  "peerDependencies": {
+    "eslint": ">=0.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/selaux/eslint-plugin-filenames.git"
+  },
+  "author": "Stefan Lau <github@stefanlau.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/selaux/eslint-plugin-filenames/issues"
+  },
+  "homepage": "https://github.com/selaux/eslint-plugin-filenames",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "file",
+    "filename",
+    "path"
+  ]
+}
