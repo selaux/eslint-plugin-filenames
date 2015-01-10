@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-filenames",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Eslint rule for consistent filenames.",
   "main": "index.js",
   "scripts": {

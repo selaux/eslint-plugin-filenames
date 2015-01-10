@@ -35,3 +35,8 @@ The convention can be configured using a regular expression (the default is `cam
 ```
 "filenames": [2, "^[a-z_]$"]
 ```
+
+## Changelog
+
+#### 0.1.0
+- Initial Release
