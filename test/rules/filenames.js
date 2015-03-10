@@ -9,6 +9,14 @@ eslintTester.addRuleTest("lib/rules/filenames", {
     valid: [
         {
             code: testCode,
+            filename: "<text>"
+        },
+        {
+            code: testCode,
+            filename: "<input>"
+        },
+        {
+            code: testCode,
             filename: "foobar.js"
         },
         {
