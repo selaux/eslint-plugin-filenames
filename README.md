@@ -33,7 +33,7 @@ A rule to enforce a certain file naming convention.
 The convention can be configured using a regular expression (the default is `camelCase.js`):
 
 ```
-"filenames": [2, "^[a-z_]$"]
+"filenames/filenames": [2, "^[a-z_]+$"]
 ```
 
 ## Changelog
