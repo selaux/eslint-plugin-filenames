@@ -38,6 +38,9 @@ The convention can be configured using a regular expression (the default is `cam
 
 ## Changelog
 
+#### 0.1.2
+- Fix example in README
+
 #### 0.1.1
 - Fix: Text via stdin always passes
 - Tests: Travis builds also run on node 0.12 and iojs now
