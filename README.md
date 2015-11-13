@@ -32,9 +32,73 @@ A rule to enforce a certain file naming convention.
 
 The convention can be configured using a regular expression (the default is `camelCase.js`):
 
-```
+```js
 "filenames/filenames": [2, "^[a-z_]+$"]
 ```
+
+An extra option can be set to check the file name against the default exported value in the module.
+By default, the exported value is ignored.
+
+#### `"match-regex-and-exported"` or `"match-exported-and-regex"`
+
+The file name must match the regular expression and the exported value name, if any. Example:
+
+```js
+"filenames/filenames": [2, "^[a-z_]+$", "match-regex-and-exported"]
+```
+
+```js
+// Considered problem only if the file isn't named foo.js
+export default function foo() {}
+
+// Always considered problem, since the exported value doesn't match the regular expression
+// (conflicting options)
+module.exports = class Foo {};
+
+// Considered problem only if the file doen't match the regular expression
+export default { foo: "bar" };
+```
+
+#### `"match-exported-or-regex"`
+
+The file name must match the exported value name, if any. Else it should match the regular
+expression.
+
+```js
+"filenames/filenames": [2, "^[a-z_]+$", "match-exported-or-regex"]
+```
+
+```js
+// Considered problem only if the file isn't named foo.js
+export default foo {}
+
+// Considered problem only if the file isn't named Foo.js
+module.exports = class Foo {};
+
+// Considered problem only if the file doesn't match the regular expression
+export default { foo: "bar" };
+```
+
+#### `"match-regex-or-exported"`
+
+The file name must match the regular expression. Else it should match the exported value name, if
+any.
+
+```js
+"filenames/filenames": [2, "^[a-z_]+$", "match-regex-or-exported"]
+```
+
+```js
+// Considered problem only if the file doesn't match the regular expression or isn't named foo.js
+export default foo {}
+
+// Considered problem only if the file doesn't match the regular expression or isn't named Foo.js
+module.exports = class Foo {};
+
+// Considered problem only if the file doesn't match the regular expression
+export default { foo: "bar" };
+```
+
 
 ## Changelog
 
