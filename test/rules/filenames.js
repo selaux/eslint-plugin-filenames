@@ -144,7 +144,7 @@ eslintTester.addRuleTest("lib/rules/filenames", {
             filename: "fooBar.js",
             args: [ 1, null, "match-regex-and-exported" ],
             errors: [
-                { message: "File 'fooBar.js' must be named 'exported.js'.", column: 0, line: 0 }
+                { message: "File 'fooBar.js' must be named 'exported.js', after its exported value.", column: 0, line: 0 }
             ]
         },
         {
@@ -153,7 +153,7 @@ eslintTester.addRuleTest("lib/rules/filenames", {
             args: [ 1, "^[a-z_]$", "match-regex-and-exported" ],
             errors: [
                 { message: "Filename 'foo.js' does not match the naming convention.", column: 0, line: 0 },
-                { message: "File 'foo.js' must be named 'exported.js'.", column: 0, line: 0 }
+                { message: "File 'foo.js' must be named 'exported.js', after its exported value.", column: 0, line: 0 }
             ]
         },
         {
@@ -169,7 +169,7 @@ eslintTester.addRuleTest("lib/rules/filenames", {
             filename: "foo.js",
             args: [ 1, null, "match-exported-or-regex" ],
             errors: [
-                { message: "File 'foo.js' must be named 'exported.js'.", column: 0, line: 0 }
+                { message: "File 'foo.js' must be named 'exported.js', after its exported value.", column: 0, line: 0 }
             ]
         },
         {
