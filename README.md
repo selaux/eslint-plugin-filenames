@@ -102,6 +102,9 @@ export default { foo: "bar" };
 
 ## Changelog
 
+#### 0.2.0
+- Add match-exported flags
+
 #### 0.1.2
 - Fix example in README
 
