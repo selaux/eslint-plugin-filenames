@@ -55,7 +55,7 @@ export default function foo() {}
 // (conflicting options)
 module.exports = class Foo {};
 
-// Considered problem only if the file doen't match the regular expression
+// Considered problem only if the file doesn't match the regular expression
 export default { foo: "bar" };
 ```
 
