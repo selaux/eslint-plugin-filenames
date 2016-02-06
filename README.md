@@ -11,6 +11,8 @@ __Please note__: This plugin will only lint the filenames of the `.js`-files you
 
 ## Enabling the plugin
 
+This plugin requires a version of `eslint>=1.0.0` to be installed as a peer dependency.
+
 Modify your `.eslintrc` file to load the plugin and enable the rule.
 
 ```
