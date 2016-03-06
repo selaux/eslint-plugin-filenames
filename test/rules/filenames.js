@@ -250,6 +250,47 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
             errors: [
                 { message: "Filename 'foo.js' does not match the naming convention.", column: 1, line: 1 }
             ]
+        },
+        {
+            code: testExportingCode,
+            filename: "/some/dir/fooBar/index.js",
+            options: [ null, "match-regex-and-exported" ],
+            errors: [
+                { message: "The directory 'fooBar' must be named 'exported', after the exported value of its index file.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: testExportingCode,
+            filename: "/some/dir/foo/index.js",
+            options: [ "^[a-z_]$", "match-regex-and-exported" ],
+            errors: [
+                { message: "Filename 'index.js' does not match the naming convention.", column: 1, line: 1 },
+                { message: "The directory 'foo' must be named 'exported', after the exported value of its index file.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: testExportingCode,
+            filename: "/some/dir/foo/index.js",
+            options: [ "^a$", "match-regex-or-exported" ],
+            errors: [
+                { message: "Filename 'index.js' does not match the naming convention nor does its parent directory 'foo' match its exported value 'exported'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: testExportingCode,
+            filename: "/some/dir/foo/index.js",
+            options: [ null, "match-exported-or-regex" ],
+            errors: [
+                { message: "The directory 'foo' must be named 'exported', after the exported value of its index file.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: testCode,
+            filename: "/some/dir/foo/index.js",
+            options: [ "^[a-z_]$", "match-exported-or-regex" ],
+            errors: [
+                { message: "Filename 'index.js' does not match the naming convention.", column: 1, line: 1 }
+            ]
         }
     ]
 
