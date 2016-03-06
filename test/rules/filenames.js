@@ -66,44 +66,42 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         {
             code: "module.exports = foo;",
             filename: "/some/dir/foo.js",
-            options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            options: [ "^", "match-exported-and-regex" ]
         },
         {
             code: "module.exports = class Foo {};",
             filename: "/some/dir/Foo.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true, classes: true }
+            parserOptions: { ecmaVersion: 6 }
         },
         {
             code: "module.exports = function foo() {}",
             filename: "/some/dir/foo.js",
-            options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            options: [ "^", "match-exported-and-regex" ]
         },
         {
             code: "export default foo;",
             filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: "export default class Foo {}",
             filename: "/some/dir/Foo.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true, classes: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: "export default function foo() {}",
             filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: "export default function () {}",
             filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: testCode,
@@ -143,44 +141,42 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         {
             code: "module.exports = foo;",
             filename: "/some/dir/foo/index.js",
-            options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            options: [ "^", "match-exported-and-regex" ]
         },
         {
             code: "module.exports = class Foo {};",
             filename: "/some/dir/Foo/index.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true, classes: true }
+            parserOptions: { ecmaVersion: 6 }
         },
         {
             code: "module.exports = function foo() {}",
             filename: "/some/dir/foo/index.js",
-            options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            options: [ "^", "match-exported-and-regex" ]
         },
         {
             code: "export default foo;",
             filename: "/some/dir/foo/index.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: "export default class Foo {}",
             filename: "/some/dir/Foo/index.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true, classes: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: "export default function foo() {}",
             filename: "/some/dir/foo/index.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: "export default function () {}",
             filename: "/some/dir/foo/index.js",
             options: [ "^", "match-exported-and-regex" ],
-            ecmaFeatures: { modules: true }
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
         }
     ],
 
