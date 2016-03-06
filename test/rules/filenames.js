@@ -35,75 +35,75 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         },
         {
             code: testCode,
-            filename: "exported.js",
+            filename: "/some/dir/exported.js",
             options: [ null, "match-regex-and-exported" ]
         },
         {
             code: testCode,
-            filename: "exported.js",
+            filename: "/some/dir/exported.js",
             options: [ null, "match-regex-or-exported" ]
         },
         {
             code: testCode,
-            filename: "exported.js",
+            filename: "/some/dir/exported.js",
             options: [ null, "match-exported-or-regex" ]
         },
         {
             code: testExportingCode,
-            filename: "exported.js",
+            filename: "/some/dir/exported.js",
             options: [ null, "match-regex-and-exported" ]
         },
         {
             code: testExportingCode,
-            filename: "bar.js",
+            filename: "/some/dir/bar.js",
             options: [ null, "match-regex-or-exported" ]
         },
         {
             code: testExportingCode,
-            filename: "exported.js",
+            filename: "/some/dir/exported.js",
             options: [ "^a$", "match-exported-or-regex" ]
         },
 
         // Testing exported name extraction
         {
             code: "module.exports = foo;",
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true }
         },
         {
             code: "module.exports = class Foo {};",
-            filename: "Foo.js",
+            filename: "/some/dir/Foo.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true, classes: true }
         },
         {
             code: "module.exports = function foo() {}",
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true }
         },
         {
             code: "export default foo;",
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true }
         },
         {
             code: "export default class Foo {}",
-            filename: "Foo.js",
+            filename: "/some/dir/Foo.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true, classes: true }
         },
         {
             code: "export default function foo() {}",
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true }
         },
         {
             code: "export default function () {}", // No exported name
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true }
         }
@@ -112,28 +112,28 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
     invalid: [
         {
             code: testCode,
-            filename: "foo_bar.js",
+            filename: "/some/dir/foo_bar.js",
             errors: [
                 { message: "Filename 'foo_bar.js' does not match the naming convention.", column: 1, line: 1 }
             ]
         },
         {
             code: testCode,
-            filename: "fooBAR.js",
+            filename: "/some/dir/fooBAR.js",
             errors: [
                 { message: "Filename 'fooBAR.js' does not match the naming convention.", column: 1, line: 1 }
             ]
         },
         {
             code: testCode,
-            filename: "fooBar$.js",
+            filename: "/some/dir/fooBar$.js",
             errors: [
                 { message: "Filename 'fooBar$.js' does not match the naming convention.", column: 1, line: 1 }
             ]
         },
         {
             code: testCode,
-            filename: "fooBar.js",
+            filename: "/some/dir/fooBar.js",
             options: [ "^[a-z_]$" ],
             errors: [
                 { message: "Filename 'fooBar.js' does not match the naming convention.", column: 1, line: 1 }
@@ -141,7 +141,7 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         },
         {
             code: testExportingCode,
-            filename: "fooBar.js",
+            filename: "/some/dir/fooBar.js",
             options: [ null, "match-regex-and-exported" ],
             errors: [
                 { message: "File 'fooBar.js' must be named 'exported.js', after its exported value.", column: 1, line: 1 }
@@ -149,7 +149,7 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         },
         {
             code: testExportingCode,
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^[a-z_]$", "match-regex-and-exported" ],
             errors: [
                 { message: "Filename 'foo.js' does not match the naming convention.", column: 1, line: 1 },
@@ -158,7 +158,7 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         },
         {
             code: testExportingCode,
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^a$", "match-regex-or-exported" ],
             errors: [
                 { message: "Filename 'foo.js' does not match the naming convention nor exported value 'exported'.", column: 1, line: 1 }
@@ -166,7 +166,7 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         },
         {
             code: testExportingCode,
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ null, "match-exported-or-regex" ],
             errors: [
                 { message: "File 'foo.js' must be named 'exported.js', after its exported value.", column: 1, line: 1 }
@@ -174,7 +174,7 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         },
         {
             code: testCode,
-            filename: "foo.js",
+            filename: "/some/dir/foo.js",
             options: [ "^[a-z_]$", "match-exported-or-regex" ],
             errors: [
                 { message: "Filename 'foo.js' does not match the naming convention.", column: 1, line: 1 }
