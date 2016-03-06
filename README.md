@@ -39,7 +39,8 @@ The convention can be configured using a regular expression (the default is `cam
 ```
 
 An extra option can be set to check the file name against the default exported value in the module.
-By default, the exported value is ignored.
+By default, the exported value is ignored.The exports of `index.js` are matched against their
+parent directory.
 
 #### `"match-regex-and-exported"` or `"match-exported-and-regex"`
 

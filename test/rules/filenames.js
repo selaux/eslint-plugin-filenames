@@ -63,8 +63,6 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
             filename: "/some/dir/exported.js",
             options: [ "^a$", "match-exported-or-regex" ]
         },
-
-        // Testing exported name extraction
         {
             code: "module.exports = foo;",
             filename: "/some/dir/foo.js",
@@ -102,8 +100,85 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
             ecmaFeatures: { modules: true }
         },
         {
-            code: "export default function () {}", // No exported name
+            code: "export default function () {}",
             filename: "/some/dir/foo.js",
+            options: [ "^", "match-exported-and-regex" ],
+            ecmaFeatures: { modules: true }
+        },
+        {
+            code: testCode,
+            filename: "/some/dir/exported/index.js",
+            options: [ null, "match-regex-and-exported" ]
+        },
+        {
+            code: testCode,
+            filename: "/some/dir/exported/index.js",
+            options: [ null, "match-regex-or-exported" ]
+        },
+        {
+            code: testCode,
+            filename: "/some/dir/exported/index.js",
+            options: [ null, "match-exported-or-regex" ]
+        },
+        {
+            code: testExportingCode,
+            filename: "/some/dir/exported/index.js",
+            options: [ null, "match-regex-and-exported" ]
+        },
+        {
+            code: "module.exports = index;",
+            filename: "index.js",
+            options: [ "^index", "match-regex-and-exported" ]
+        },
+        {
+            code: testExportingCode,
+            filename: "/some/dir/bar/index.js",
+            options: [ null, "match-regex-or-exported" ]
+        },
+        {
+            code: testExportingCode,
+            filename: "/some/dir/exported/index.js",
+            options: [ "^a$", "match-exported-or-regex" ]
+        },
+        {
+            code: "module.exports = foo;",
+            filename: "/some/dir/foo/index.js",
+            options: [ "^", "match-exported-and-regex" ],
+            ecmaFeatures: { modules: true }
+        },
+        {
+            code: "module.exports = class Foo {};",
+            filename: "/some/dir/Foo/index.js",
+            options: [ "^", "match-exported-and-regex" ],
+            ecmaFeatures: { modules: true, classes: true }
+        },
+        {
+            code: "module.exports = function foo() {}",
+            filename: "/some/dir/foo/index.js",
+            options: [ "^", "match-exported-and-regex" ],
+            ecmaFeatures: { modules: true }
+        },
+        {
+            code: "export default foo;",
+            filename: "/some/dir/foo/index.js",
+            options: [ "^", "match-exported-and-regex" ],
+            ecmaFeatures: { modules: true }
+        },
+        {
+            code: "export default class Foo {}",
+            filename: "/some/dir/Foo/index.js",
+            options: [ "^", "match-exported-and-regex" ],
+            ecmaFeatures: { modules: true, classes: true }
+        },
+        {
+            code: "export default function foo() {}",
+            filename: "/some/dir/foo/index.js",
+            options: [ "^", "match-exported-and-regex" ],
+            ecmaFeatures: { modules: true }
+        },
+        {
+            code: "export default function () {}",
+            filename: "/some/dir/foo/index.js",
             options: [ "^", "match-exported-and-regex" ],
             ecmaFeatures: { modules: true }
         }
