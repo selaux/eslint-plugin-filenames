@@ -46,7 +46,7 @@ An extra option can be set to check the file name against the default exported v
 By default, the exported value is ignored.The exports of `index.js` are matched against their
 parent directory.
 
-#### `"match-regex-and-exported"` or `"match-exported-and-regex"`
+##### `"match-regex-and-exported"` or `"match-exported-and-regex"`
 
 The file name must match the regular expression and the exported value name, if any. Example:
 
@@ -66,7 +66,7 @@ module.exports = class Foo {};
 export default { foo: "bar" };
 ```
 
-#### `"match-exported-or-regex"`
+##### `"match-exported-or-regex"`
 
 The file name must match the exported value name, if any. Else it should match the regular
 expression.
@@ -86,7 +86,7 @@ module.exports = class Foo {};
 export default { foo: "bar" };
 ```
 
-#### `"match-regex-or-exported"`
+##### `"match-regex-or-exported"`
 
 The file name must match the regular expression. Else it should match the exported value name, if
 any.
