@@ -177,6 +177,14 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
             filename: "/some/dir/foo/index.js",
             options: [ "^", "match-exported-and-regex" ],
             parserOptions: { ecmaVersion: 6, sourceType: "module" }
+        },
+        {
+            code: testCode,
+            filename: "/some/dir/index.js",
+            options: [ "^[a-z]+$", "match-regex", true ],
+            errors: [
+                { message: "'index.js' files are not allowed.", column: 1, line: 1 }
+            ]
         }
     ],
 
@@ -290,6 +298,14 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
             options: [ "^[a-z_]$", "match-exported-or-regex" ],
             errors: [
                 { message: "Filename 'index.js' does not match the naming convention.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: testCode,
+            filename: "/some/dir/index.js",
+            options: [ "^[a-z]+$", "match-regex", false ],
+            errors: [
+                { message: "'index.js' files are not allowed.", column: 1, line: 1 }
             ]
         }
     ]

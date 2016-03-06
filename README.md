@@ -32,11 +32,15 @@ Modify your `.eslintrc` file to load the plugin and enable the rule.
 
 A rule to enforce a certain file naming convention.
 
+#### Naming Schema
+
 The convention can be configured using a regular expression (the default is `camelCase.js`):
 
 ```js
 "filenames/filenames": [2, "^[a-z_]+$"]
 ```
+
+#### Matching Exported Values
 
 An extra option can be set to check the file name against the default exported value in the module.
 By default, the exported value is ignored.The exports of `index.js` are matched against their
@@ -100,6 +104,18 @@ module.exports = class Foo {};
 
 // Considered problem only if the file doesn't match the regular expression
 export default { foo: "bar" };
+```
+
+#### Disallow index.js files
+
+Having a bunch of `index.js` files can have negative influence on developer experience, e.g. when
+opening files by name. This plugin gives you the option to forbid creating index.js files
+in your project. A third parameter can be passed in the configuration that specifies whether
+`index.js` files are allowed.
+
+```js
+// This configuration will consider index.js files as a linting error
+"filenames/filenames": [2, "^[a-z-]+$", "match-regex", false ]
 ```
 
 
