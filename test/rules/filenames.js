@@ -1,12 +1,20 @@
-var filenamesRule = require('../../lib/rules/filenames'),
+var sinon = require("sinon"),
+    filenamesRule = require("../../lib/rules/filenames"),
     RuleTester = require("eslint").RuleTester;
 
 var testCode = "var foo = 'bar';",
     testExportingCode = "module.exports = exported;",
     ruleTester = new RuleTester();
 
-ruleTester.run("lib/rules/filenames", filenamesRule, {
+beforeEach(function () {
+    sinon.stub(process, "cwd").returns('/foo');
+});
 
+afterEach(function () {
+    process.cwd.restore();
+});
+
+ruleTester.run("lib/rules/filenames", filenamesRule, {
     valid: [
         {
             code: testCode,
@@ -175,6 +183,12 @@ ruleTester.run("lib/rules/filenames", filenamesRule, {
         {
             code: "export default function () {}",
             filename: "/some/dir/foo/index.js",
+            options: [ "^", "match-exported-and-regex" ],
+            parserOptions: { ecmaVersion: 6, sourceType: "module" }
+        },
+        {
+            code: "export default function foo() {}",
+            filename: "index.js",
             options: [ "^", "match-exported-and-regex" ],
             parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
