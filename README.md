@@ -13,111 +13,58 @@ __Please note__: This plugin will only lint the filenames of the `.js`-files you
 
 This plugin requires a version of `eslint>=1.0.0` to be installed as a peer dependency.
 
-Modify your `.eslintrc` file to load the plugin and enable the rule.
+Modify your `.eslintrc` file to load the plugin and enable the rules you want to use.
 
-```
+```json
 {
   "plugins": [
     "filenames"
   ],
   "rules": {
-    "filenames/filenames": 2
+    "filenames/match-regex": 2,
+    "filenames/match-exported": 2,
+    "filenames/no-index": 2
   }
 }
 ```
 
 ## Rules
 
-### Consistent Filenames (filenames)
+### Consistent Filenames via regex (match-regex)
 
-A rule to enforce a certain file naming convention.
-
-#### Naming Schema
+A rule to enforce a certain file naming convention using a regular expression.
 
 The convention can be configured using a regular expression (the default is `camelCase.js`):
 
-```js
-"filenames/filenames": [2, "^[a-z_]+$"]
+```json
+"filenames/match-regex": [2, "^[a-z_]+$"]
 ```
 
-#### Matching Exported Values
+With these configuration options, `camelCase.js` will be reported as an error while `snake_case.js` will pass.
 
-An extra option can be set to check the file name against the default exported value in the module.
-By default, the exported value is ignored.The exports of `index.js` are matched against their
-parent directory.
+### Matching Exported Values (match-exported)
 
-##### `"match-regex-and-exported"` or `"match-exported-and-regex"`
-
-The file name must match the regular expression and the exported value name, if any. Example:
+Match the file name against the default exported value in the module. Files that dont have a default export will
+be ignored. The exports of `index.js` are matched against their parent directory.
 
 ```js
-"filenames/filenames": [2, "^[a-z_]+$", "match-regex-and-exported"]
-```
-
-```js
-// Considered problem only if the file isn't named foo.js
+// Considered problem only if the file isn't named foo.js or foo/index.js
 export default function foo() {}
 
-// Always considered problem, since the exported value doesn't match the regular expression
-// (conflicting options)
-module.exports = class Foo {};
+// Considered problem only if the file isn't named Foo.js or Foo/index.js
+module.exports = class Foo() {}
 
-// Considered problem only if the file doesn't match the regular expression
+// Considered problem only if the file isn't named someVariable.js or someVariable/index.js
+module.exports = someVariable;
+
+// Never considered a problem
 export default { foo: "bar" };
 ```
 
-##### `"match-exported-or-regex"`
-
-The file name must match the exported value name, if any. Else it should match the regular
-expression.
-
-```js
-"filenames/filenames": [2, "^[a-z_]+$", "match-exported-or-regex"]
-```
-
-```js
-// Considered problem only if the file isn't named foo.js
-export default foo {}
-
-// Considered problem only if the file isn't named Foo.js
-module.exports = class Foo {};
-
-// Considered problem only if the file doesn't match the regular expression
-export default { foo: "bar" };
-```
-
-##### `"match-regex-or-exported"`
-
-The file name must match the regular expression. Else it should match the exported value name, if
-any.
-
-```js
-"filenames/filenames": [2, "^[a-z_]+$", "match-regex-or-exported"]
-```
-
-```js
-// Considered problem only if the file doesn't match the regular expression or isn't named foo.js
-export default foo {}
-
-// Considered problem only if the file doesn't match the regular expression or isn't named Foo.js
-module.exports = class Foo {};
-
-// Considered problem only if the file doesn't match the regular expression
-export default { foo: "bar" };
-```
-
-#### Disallow index.js files
+#### Don't allow index.js files (no-index)
 
 Having a bunch of `index.js` files can have negative influence on developer experience, e.g. when
-opening files by name. This plugin gives you the option to forbid creating index.js files
-in your project. A third parameter can be passed in the configuration that specifies whether
-`index.js` files are allowed.
-
-```js
-// This configuration will consider index.js files as a linting error
-"filenames/filenames": [2, "^[a-z-]+$", "match-regex", false ]
-```
-
+opening files by name. When enabling this rule. `index.js` files will always be considered a problem.
 
 ## Changelog
 
