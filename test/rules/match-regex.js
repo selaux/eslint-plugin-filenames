@@ -1,7 +1,8 @@
 var regexRule = require("../../lib/rules/match-regex"),
     RuleTester = require("eslint").RuleTester;
 
-var testCode = "var foo = 'bar';",
+var exportingCode = 'module.exports = foo',
+    testCode = "var foo = 'bar';",
     ruleTester = new RuleTester();
 
 ruleTester.run("lib/rules/match-regex", regexRule, {
@@ -41,19 +42,14 @@ ruleTester.run("lib/rules/match-regex", regexRule, {
             filename: "/foo/dir/fooBar.js"
         },
         {
-            code: testCode,
-            filename: "/some/dir/exported.js",
-            options: [ null, "match-regex-and-exported" ]
+            code: exportingCode,
+            filename: "foo_bar.js",
+            options: [ null, true ]
         },
         {
-            code: testCode,
-            filename: "/some/dir/exported.js",
-            options: [ null, "match-regex-or-exported" ]
-        },
-        {
-            code: testCode,
-            filename: "/some/dir/exported.js",
-            options: [ null, "match-exported-or-regex" ]
+            code: exportingCode,
+            filename: "fooBar.js",
+            options: [ "^[a-z_]$", true ]
         }
     ],
 

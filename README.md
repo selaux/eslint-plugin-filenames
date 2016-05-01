@@ -34,13 +34,15 @@ Modify your `.eslintrc` file to load the plugin and enable the rules you want to
 
 A rule to enforce a certain file naming convention using a regular expression.
 
-The convention can be configured using a regular expression (the default is `camelCase.js`):
+The convention can be configured using a regular expression (the default is `camelCase.js`). Additionally
+exporting files can be ignored with a second configuration parameter.
 
 ```json
-"filenames/match-regex": [2, "^[a-z_]+$"]
+"filenames/match-regex": [2, "^[a-z_]+$", true]
 ```
 
 With these configuration options, `camelCase.js` will be reported as an error while `snake_case.js` will pass.
+Additionally the files that have a named default export (according to the logic in the `match-exported` rule) will be ignored.
 
 ### Matching Exported Values (match-exported)
 
