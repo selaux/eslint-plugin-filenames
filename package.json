@@ -12,13 +12,13 @@
     "coveralls": "cat ./build/coverage/lcov.info | coveralls"
   },
   "devDependencies": {
-    "chai": "2.1.1",
-    "coveralls": "2.11.2",
+    "chai": "3.5.0",
+    "coveralls": "2.11.7",
     "eslint": ">=2.0.0",
     "eslint-plugin-filenames": "^1.0.0",
-    "istanbul": "0.3.7",
-    "mocha": "2.2.1",
-    "sinon": "1.17.3"
+    "istanbul": "0.4.3",
+    "mocha": "2.4.5",
+    "sinon": "1.17.4"
   },
   "peerDependencies": {
     "eslint": "*"
