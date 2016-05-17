@@ -14,7 +14,8 @@
   "devDependencies": {
     "chai": "2.1.1",
     "coveralls": "2.11.2",
-    "eslint": ">=1.0.0",
+    "eslint": ">=2.0.0",
+    "eslint-plugin-filenames": "^1.0.0",
     "istanbul": "0.3.7",
     "mocha": "2.2.1",
     "sinon": "1.17.3"
