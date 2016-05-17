@@ -64,7 +64,7 @@ module.exports = someVariable;
 export default { foo: "bar" };
 ```
 
-#### Don't allow index.js files (no-index)
+### Don't allow index.js files (no-index)
 
 Having a bunch of `index.js` files can have negative influence on developer experience, e.g. when
 opening files by name. When enabling this rule. `index.js` files will always be considered a problem.
