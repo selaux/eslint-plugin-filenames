@@ -1,5 +1,8 @@
 {
   "extends": "eslint:recommended",
+  "rules": {
+      "eol-last": 2
+  },
   "env": {
     "node": true
   }

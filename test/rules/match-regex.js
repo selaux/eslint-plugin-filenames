@@ -84,5 +84,4 @@ ruleTester.run("lib/rules/match-regex", regexRule, {
             ]
         }
     ]
-
 });

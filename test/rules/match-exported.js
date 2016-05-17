@@ -134,5 +134,4 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             ]
         }
     ]
-
 });

@@ -40,5 +40,4 @@ ruleTester.run("lib/rules/no-index", indexRule, {
             ]
         }
     ]
-
 });
