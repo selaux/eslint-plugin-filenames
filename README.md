@@ -64,6 +64,26 @@ module.exports = someVariable;
 export default { foo: "bar" };
 ```
 
+If your filename policy doesn't quite match with your variable naming policy, you can add a tansform:
+
+```json
+"filenames/match-exported": [2, {
+  transform: 'snake'
+}]
+```
+
+Now, in your code:
+
+```js
+// Considered problem only if file isn't named variable_name.js or variable_name/index.js
+export default function variableName;
+```
+
+Available transforms:
+'[snake](https://www.npmjs.com/package/lodash.snakecase)',
+'[kebab](https://www.npmjs.com/package/lodash.kebabcase)', and
+'[camel](https://www.npmjs.com/package/lodash.camelcase)'
+
 ### Don't allow index.js files (no-index)
 
 Having a bunch of `index.js` files can have negative influence on developer experience, e.g. when
