@@ -68,7 +68,7 @@ If your filename policy doesn't quite match with your variable naming policy, yo
 
 ```json
 "filenames/match-exported": [2, {
-  transform: 'snake'
+  "transform": "snake"
 }]
 ```
 
