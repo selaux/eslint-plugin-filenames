@@ -11,6 +11,12 @@
     "report-coverage-html": "istanbul report --dir  build/coverage html",
     "coveralls": "cat ./build/coverage/lcov.info | coveralls"
   },
+  "dependencies": {
+    "lodash.camelcase": "4.1.1",
+    "lodash.kebabcase": "4.0.1",
+    "lodash.snakecase": "4.0.1"
+  },
+
   "devDependencies": {
     "chai": "3.5.0",
     "coveralls": "2.11.7",

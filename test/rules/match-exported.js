@@ -10,6 +10,10 @@ var testCode = "var foo = 'bar';",
     exportedEs6ClassCode = "export default class Foo {};",
     exportedEs6FunctionCode = "export default function foo() {};",
     exportedEs6Index = "export default function index() {};",
+    camelCaseCommonJS = "module.exports = variableName;",
+    snakeCaseCommonJS = "module.exports = variable_name;",
+    camelCaseEs6 = "export default variableName;",
+    snakeCaseEs6 = "export default variable_name;",
     ruleTester = new RuleTester();
 
 ruleTester.run("lib/rules/match-exported", exportedRule, {
@@ -131,6 +135,69 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
             errors: [
                 { message: "The directory 'foo' must be named 'exported', after the exported value of its index file.", column: 1, line: 1 }
+            ]
+        }
+    ]
+});
+
+ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
+    valid: [
+        {
+            code: camelCaseCommonJS,
+            filename: "variable_name.js",
+            options: ['snake']
+        },
+        {
+            code: camelCaseCommonJS,
+            filename: "variable_name/index.js",
+            options: ['snake']
+        },
+        {
+            code: camelCaseCommonJS,
+            filename: "variable-name.js",
+            options: ['kebab']
+        },
+        {
+            code: snakeCaseCommonJS,
+            filename: "variableName.js",
+            options: ['camel']
+        },
+        {
+            code: camelCaseEs6,
+            filename: "variable_name.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: ['snake']
+        },
+        {
+            code: camelCaseEs6,
+            filename: "variable-name.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: ['kebab']
+        },
+        {
+            code: snakeCaseEs6,
+            filename: "variableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: ['camel']
+        }
+    ],
+
+    invalid: [
+        {
+            code: camelCaseCommonJS,
+            filename: "variableName.js",
+            options: ['snake'],
+            errors: [
+                { message: "Filename 'variableName' must match the exported name 'variable_name'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: camelCaseEs6,
+            filename: "variableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: ['kebab'],
+            errors: [
+                { message: "Filename 'variableName' must match the exported name 'variable-name'.", column: 1, line: 1 }
             ]
         }
     ]
