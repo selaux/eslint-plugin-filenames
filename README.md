@@ -67,15 +67,13 @@ export default { foo: "bar" };
 If your filename policy doesn't quite match with your variable naming policy, you can add a tansform:
 
 ```json
-"filenames/match-exported": [2, {
-  "transform": "snake"
-}]
+"filenames/match-exported": [2, "kebab"]
 ```
 
 Now, in your code:
 
 ```js
-// Considered problem only if file isn't named variable_name.js or variable_name/index.js
+// Considered problem only if file isn't named variable-name.js or variable-name/index.js
 export default function variableName;
 ```
 

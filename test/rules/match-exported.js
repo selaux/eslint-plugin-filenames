@@ -10,6 +10,10 @@ var testCode = "var foo = 'bar';",
     exportedEs6ClassCode = "export default class Foo {};",
     exportedEs6FunctionCode = "export default function foo() {};",
     exportedEs6Index = "export default function index() {};",
+    camelCaseCommonJS = "module.exports = variableName;",
+    snakeCaseCommonJS = "module.exports = variable_name;",
+    camelCaseEs6 = "export default variableName;",
+    snakeCaseEs6 = "export default variable_name;",
     ruleTester = new RuleTester();
 
 ruleTester.run("lib/rules/match-exported", exportedRule, {
@@ -136,69 +140,45 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
     ]
 });
 
-var camelCaseCommonJS = "module.exports = variableName;",
-    snakeCaseCommonJS = "module.exports = variable_name;",
-    camelCaseEs6 = "export default variableName;",
-    snakeCaseEs6 = "export default variable_name;";
-
 ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
     valid: [
         {
             code: camelCaseCommonJS,
-            filename: "variableName.js",
-            options: [{}]
-        },
-        {
-            code: camelCaseCommonJS,
             filename: "variable_name.js",
-            options: [{
-                transform: 'snake'
-            }]
+            options: ['snake']
         },
         {
             code: camelCaseCommonJS,
             filename: "variable_name/index.js",
-            options: [{
-                transform: 'snake'
-            }]
+            options: ['snake']
         },
         {
             code: camelCaseCommonJS,
             filename: "variable-name.js",
-            options: [{
-                transform: 'kebab'
-            }]
+            options: ['kebab']
         },
         {
             code: snakeCaseCommonJS,
             filename: "variableName.js",
-            options: [{
-                transform: 'camel'
-            }]
+            options: ['camel']
         },
         {
             code: camelCaseEs6,
             filename: "variable_name.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
-            options: [{
-                transform: 'snake'
-            }]
+            options: ['snake']
         },
         {
             code: camelCaseEs6,
             filename: "variable-name.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
-            options: [{
-                transform: 'kebab'
-            }]
+            options: ['kebab']
         },
         {
             code: snakeCaseEs6,
             filename: "variableName.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
-            options: [{
-                transform: 'camel'
-            }]
+            options: ['camel']
         }
     ],
 
@@ -206,22 +186,18 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
         {
             code: camelCaseCommonJS,
             filename: "variableName.js",
-            options: [{
-                transform: 'snake'
-            }],
+            options: ['snake'],
             errors: [
-                { message: "Filename 'variableName' must match the (transformed) exported name 'variable_name'.", column: 1, line: 1 }
+                { message: "Filename 'variableName' must match the exported name 'variable_name'.", column: 1, line: 1 }
             ]
         },
         {
             code: camelCaseEs6,
             filename: "variableName.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
-            options: [{
-                transform: 'kebab'
-            }],
+            options: ['kebab'],
             errors: [
-                { message: "Filename 'variableName' must match the (transformed) exported name 'variable-name'.", column: 1, line: 1 }
+                { message: "Filename 'variableName' must match the exported name 'variable-name'.", column: 1, line: 1 }
             ]
         }
     ]
