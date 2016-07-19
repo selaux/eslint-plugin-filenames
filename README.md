@@ -89,6 +89,9 @@ opening files by name. When enabling this rule. `index.js` files will always be 
 
 ## Changelog
 
+#### 1.1.0
+- Introduce `transform` option for `match-exported`
+
 #### 1.0.0
 - Split rule into `match-regex`, `match-exported` and `no-index`
 
