@@ -4,11 +4,15 @@ var exportedRule = require("../../lib/rules/match-exported"),
 var testCode = "var foo = 'bar';",
     testCallCode = "export default foo();",
     exportedVariableCode = "module.exports = exported;",
+    exportedJsxClassCode = "module.exports = class Foo { render() { return <span>Test Class</span>; } };",
     exportedClassCode = "module.exports = class Foo {};",
     exportedFunctionCode = "module.exports = function foo() {};",
+    exportedJsxFunctionCode = "module.exports = function foo() { return <span>Test Fn</span> };",
     exportedEs6VariableCode = "export default exported;",
     exportedEs6ClassCode = "export default class Foo {};",
+    exportedEs6JsxClassCode = "export default class Foo { render() { return <span>Test Class</span>; } };",
     exportedEs6FunctionCode = "export default function foo() {};",
+    exportedEs6JsxFunctionCode = "export default function foo() { return <span>Test Fn</span> };",
     exportedEs6Index = "export default function index() {};",
     camelCaseCommonJS = "module.exports = variableName;",
     snakeCaseCommonJS = "module.exports = variable_name;",
@@ -45,8 +49,18 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             parserOptions: { ecmaVersion: 6 }
         },
         {
+            code: exportedJsxClassCode,
+            filename: "/some/dir/Foo.js",
+            parserOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } }
+        },
+        {
             code: exportedFunctionCode,
             filename: "/some/dir/foo.js"
+        },
+        {
+            code: exportedJsxFunctionCode,
+            filename: "/some/dir/foo.js",
+            parserOptions: { ecmaFeatures: { jsx: true } }
         },
         {
             code: exportedEs6VariableCode,
@@ -59,14 +73,29 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
+            code: exportedEs6JsxClassCode,
+            filename: "/some/dir/Foo.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } }
+        },
+        {
             code: exportedEs6FunctionCode,
             filename: "/some/dir/foo.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
+            code: exportedEs6JsxFunctionCode,
+            filename: "/some/dir/foo.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } }
+        },
+        {
             code: exportedEs6FunctionCode,
             filename: "/some/dir/foo/index.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" }
+        },
+        {
+            code: exportedEs6JsxFunctionCode,
+            filename: "/some/dir/foo/index.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } }
         },
         {
             code: exportedEs6FunctionCode,
@@ -99,8 +128,24 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             ]
         },
         {
+            code: exportedJsxClassCode,
+            filename: "/some/dir/foo.js",
+            parserOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } },
+            errors: [
+                { message: "Filename 'foo' must match the exported name 'Foo'.", column: 1, line: 1 }
+            ]
+        },
+        {
             code: exportedFunctionCode,
             filename: "/some/dir/bar.js",
+            errors: [
+                { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: exportedJsxFunctionCode,
+            filename: "/some/dir/bar.js",
+            parserOptions: { ecmaFeatures: { jsx: true } },
             errors: [
                 { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
             ]
@@ -122,9 +167,25 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             ]
         },
         {
+            code: exportedEs6JsxClassCode,
+            filename: "/some/dir/bar.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
+            errors: [
+                { message: "Filename 'bar' must match the exported name 'Foo'.", column: 1, line: 1 }
+            ]
+        },
+        {
             code: exportedEs6FunctionCode,
             filename: "/some/dir/fooBar/index.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            errors: [
+                { message: "The directory 'fooBar' must be named 'foo', after the exported value of its index file.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: exportedEs6JsxFunctionCode,
+            filename: "/some/dir/fooBar/index.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
             errors: [
                 { message: "The directory 'fooBar' must be named 'foo', after the exported value of its index file.", column: 1, line: 1 }
             ]
