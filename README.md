@@ -7,7 +7,7 @@
 
 Adds [eslint](http://eslint.org/) rules to ensure consistent filenames for your javascript files.
 
-__Please note__: This plugin will only lint the filenames of the `.js`-files you are linting with eslint. It will ignore all other files (e.g. non-js files, files not linted with eslint).
+__Please note__: This plugin will only lint the filenames of the `.js`, `.jsx` files you are linting with eslint. It will ignore other files that are not linted with eslint.
 
 ## Enabling the plugin
 
