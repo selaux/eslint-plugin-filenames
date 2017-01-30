@@ -197,6 +197,14 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             errors: [
                 { message: "The directory 'foo' must be named 'exported', after the exported value of its index file.", column: 1, line: 1 }
             ]
+        },
+        {
+            code: exportedJsxClassCode,
+            filename: "/some/dir/Foo.react.js",
+            parserOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } },
+            errors: [
+                { message: "Filename 'Foo.react' must match the exported name 'Foo'.", column: 1, line: 1 }
+            ]
         }
     ]
 });
@@ -240,6 +248,18 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             filename: "variableName.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
             options: ['camel']
+        },
+        {
+            code: exportedJsxClassCode,
+            filename: "/some/dir/Foo.react.js",
+            parserOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } },
+            options: ["", "\\.react"]
+        },
+        {
+            code: exportedEs6JsxClassCode,
+            filename: "/some/dir/Foo.react.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
+            options: ["", "\\.react"]
         }
     ],
 
@@ -259,6 +279,15 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             options: ['kebab'],
             errors: [
                 { message: "Filename 'variableName' must match the exported name 'variable-name'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: exportedEs6JsxClassCode,
+            filename: "/some/dir/Foo.bar.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
+            options: ["", "\\.react"],
+            errors: [
+                { message: "Filename 'Foo.bar' must match the exported name 'Foo'.", column: 1, line: 1 }
             ]
         }
     ]

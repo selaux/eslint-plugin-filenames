@@ -82,6 +82,12 @@ Available transforms:
 '[kebab](https://www.npmjs.com/package/lodash.kebabcase)', and
 '[camel](https://www.npmjs.com/package/lodash.camelcase)'
 
+If you prefer to use suffixes for your files (e.g. `Foo.react.js` for a React component file), you can use the following configuration:
+
+```json
+"filenames/match-exported": [2, "", "\\.react"]
+```
+
 ### Don't allow index.js files (no-index)
 
 Having a bunch of `index.js` files can have negative influence on developer experience, e.g. when
