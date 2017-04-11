@@ -11,11 +11,11 @@ describe("index.js", function () {
         expect(index.rules['match-regex']).to.equal(matchRegex);
     });
 
-    it("should export the match-regex rule", function () {
+    it("should export the match-exported rule", function () {
         expect(index.rules['match-exported']).to.equal(matchExported);
     });
 
-    it("should export the match-regex rule", function () {
+    it("should export the no-index rule", function () {
         expect(index.rules['no-index']).to.equal(noIndex);
     });
 });
