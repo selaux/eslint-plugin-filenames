@@ -253,13 +253,13 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             code: exportedJsxClassCode,
             filename: "/some/dir/Foo.react.js",
             parserOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } },
-            options: ["", "\\.react"]
+            options: ["", "\\.react$"]
         },
         {
             code: exportedEs6JsxClassCode,
             filename: "/some/dir/Foo.react.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
-            options: ["", "\\.react"]
+            options: ["", "\\.react$"]
         }
     ],
 
@@ -285,9 +285,18 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             code: exportedEs6JsxClassCode,
             filename: "/some/dir/Foo.bar.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
-            options: ["", "\\.react"],
+            options: ["", "\\.react$"],
             errors: [
                 { message: "Filename 'Foo.bar' must match the exported name 'Foo'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: exportedEs6JsxClassCode,
+            filename: "/some/dir/Foo.react/index.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
+            options: ["", "\\.react$"],
+            errors: [
+                { message: "The directory 'Foo.react' must be named 'Foo', after the exported value of its index file.", column: 1, line: 1 }
             ]
         }
     ]
