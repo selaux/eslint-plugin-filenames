@@ -256,16 +256,28 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             options: ['pascal']
         },
         {
+            code: snakeCaseEs6,
+            filename: "variableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: [ [ 'pascal', 'camel' ] ]
+        },
+        {
+            code: snakeCaseEs6,
+            filename: "VariableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: [ [ 'pascal', 'camel' ] ]
+        },
+        {
             code: exportedJsxClassCode,
             filename: "/some/dir/Foo.react.js",
             parserOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } },
-            options: ["", "\\.react$"]
+            options: [null, "\\.react$"]
         },
         {
             code: exportedEs6JsxClassCode,
             filename: "/some/dir/Foo.react.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
-            options: ["", "\\.react$"]
+            options: [null, "\\.react$"]
         }
     ],
 
@@ -275,7 +287,7 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             filename: "variableName.js",
             options: ['snake'],
             errors: [
-                { message: "Filename 'variableName' must match the exported name 'variable_name'.", column: 1, line: 1 }
+                { message: "Filename 'variableName' must match the exported and transformed name 'variable_name'.", column: 1, line: 1 }
             ]
         },
         {
@@ -284,7 +296,7 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
             options: ['kebab'],
             errors: [
-                { message: "Filename 'variableName' must match the exported name 'variable-name'.", column: 1, line: 1 }
+                { message: "Filename 'variableName' must match the exported and transformed name 'variable-name'.", column: 1, line: 1 }
             ]
         },
         {
@@ -293,14 +305,23 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
             options: ['pascal'],
             errors: [
-                { message: "Filename 'variableName' must match the exported name 'VariableName'.", column: 1, line: 1 }
+                { message: "Filename 'variableName' must match the exported and transformed name 'VariableName'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: camelCaseEs6,
+            filename: "variableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: [ ['pascal', 'snake' ] ],
+            errors: [
+                { message: "Filename 'variableName' must match any of the exported and transformed names 'VariableName', 'variable_name'.", column: 1, line: 1 }
             ]
         },
         {
             code: exportedEs6JsxClassCode,
             filename: "/some/dir/Foo.bar.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
-            options: ["", "\\.react$"],
+            options: [null, "\\.react$"],
             errors: [
                 { message: "Filename 'Foo.bar' must match the exported name 'Foo'.", column: 1, line: 1 }
             ]
@@ -309,7 +330,7 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             code: exportedEs6JsxClassCode,
             filename: "/some/dir/Foo.react/index.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
-            options: ["", "\\.react$"],
+            options: [null, "\\.react$"],
             errors: [
                 { message: "The directory 'Foo.react' must be named 'Foo', after the exported value of its index file.", column: 1, line: 1 }
             ]
