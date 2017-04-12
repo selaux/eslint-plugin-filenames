@@ -82,10 +82,19 @@ Available transforms:
 '[kebab](https://www.npmjs.com/package/lodash.kebabcase)', and
 '[camel](https://www.npmjs.com/package/lodash.camelcase)'
 
-If you prefer to use suffixes for your files (e.g. `Foo.react.js` for a React component file), you can use the following configuration:
+If you prefer to use suffixes for your files (e.g. `Foo.react.js` for a React component file),
+you can use a second configuration parameter. It allows you to remove parts of a filename matching a regex pattern
+before transforming and matching against the export.
 
 ```json
-"filenames/match-exported": [2, "", "\\.react"]
+"filenames/match-exported": [2, "", "\\.react$"]
+```
+
+Now, in your code:
+
+```js
+// Considered problem only if file isn't named variableName.react.js, variableName.js or variableName/index.js
+export default function variableName;
 ```
 
 ### Don't allow index.js files (no-index)
