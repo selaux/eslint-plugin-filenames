@@ -310,6 +310,15 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
         },
         {
             code: camelCaseEs6,
+            filename: "VariableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: [ [ null ] ],
+            errors: [
+                { message: "Filename 'VariableName' must match the exported name 'variableName'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: camelCaseEs6,
             filename: "variableName.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" },
             options: [ ['pascal', 'snake' ] ],
