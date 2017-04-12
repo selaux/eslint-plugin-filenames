@@ -79,8 +79,9 @@ export default function variableName;
 
 Available transforms:
 '[snake](https://www.npmjs.com/package/lodash.snakecase)',
-'[kebab](https://www.npmjs.com/package/lodash.kebabcase)', and
-'[camel](https://www.npmjs.com/package/lodash.camelcase)'
+'[kebab](https://www.npmjs.com/package/lodash.kebabcase)',
+'[camel](https://www.npmjs.com/package/lodash.camelcase)', and
+'pascal' (camel-cased with first letter in upper case).
 
 If you prefer to use suffixes for your files (e.g. `Foo.react.js` for a React component file),
 you can use a second configuration parameter. It allows you to remove parts of a filename matching a regex pattern

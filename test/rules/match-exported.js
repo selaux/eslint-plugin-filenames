@@ -250,6 +250,12 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             options: ['camel']
         },
         {
+            code: snakeCaseEs6,
+            filename: "VariableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: ['pascal']
+        },
+        {
             code: exportedJsxClassCode,
             filename: "/some/dir/Foo.react.js",
             parserOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } },
@@ -279,6 +285,15 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             options: ['kebab'],
             errors: [
                 { message: "Filename 'variableName' must match the exported name 'variable-name'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: camelCaseEs6,
+            filename: "variableName.js",
+            parserOptions: { ecmaVersion: 6, sourceType: "module" },
+            options: ['pascal'],
+            errors: [
+                { message: "Filename 'variableName' must match the exported name 'VariableName'.", column: 1, line: 1 }
             ]
         },
         {
