@@ -12,20 +12,20 @@
     "coveralls": "cat ./build/coverage/lcov.info | coveralls"
   },
   "dependencies": {
-    "lodash.camelcase": "4.1.1",
-    "lodash.kebabcase": "4.0.1",
-    "lodash.snakecase": "4.0.1",
+    "lodash.camelcase": "4.3.0",
+    "lodash.kebabcase": "4.1.1",
+    "lodash.snakecase": "4.1.1",
     "lodash.upperfirst": "4.3.1"
   },
 
   "devDependencies": {
     "chai": "3.5.0",
-    "coveralls": "2.11.7",
-    "eslint": "^2.0.0",
+    "coveralls": "2.13.0",
+    "eslint": "^3.0.0",
     "eslint-plugin-filenames": "^1.0.0",
-    "istanbul": "0.4.3",
-    "mocha": "2.4.5",
-    "sinon": "1.17.4"
+    "istanbul": "0.4.5",
+    "mocha": "3.2.0",
+    "sinon": "2.1.0"
   },
   "peerDependencies": {
     "eslint": "*"
