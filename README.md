@@ -64,7 +64,7 @@ module.exports = someVariable;
 export default { foo: "bar" };
 ```
 
-If your filename policy doesn't quite match with your variable naming policy, you can add one or multiple tansforms:
+If your filename policy doesn't quite match with your variable naming policy, you can add one or multiple transforms:
 
 ```json
 "filenames/match-exported": [ 2, "kebab" ]
