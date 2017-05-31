@@ -111,7 +111,7 @@ opening files by name. When enabling this rule. `index.js` files will always be 
 
 ## Changelog
 
-#### 1.1.0
+#### 1.2.0
 - Introduce `strip` option for `match-exported`
 - Introduce support for multiple transform options
 - Introduce `pascal` transform
