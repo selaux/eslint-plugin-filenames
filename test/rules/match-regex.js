@@ -50,6 +50,11 @@ ruleTester.run("lib/rules/match-regex", regexRule, {
             code: exportingCode,
             filename: "fooBar.js",
             options: [ "^[a-z_]$", true ]
+        },
+        {
+            code: testCode,
+            filename: "valid.js",
+            options: [ "^valid\.js$", undefined, true ]
         }
     ],
 
@@ -81,6 +86,14 @@ ruleTester.run("lib/rules/match-regex", regexRule, {
             options: [ "^[a-z_]$" ],
             errors: [
                 { message: "Filename 'fooBar.js' does not match the naming convention.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: testCode,
+            filename: "in.valid.js",
+            options: [ "^(?!in)\.valid\.js$", undefined, true ],
+            errors: [
+                { message: "Filename 'in.valid.js' does not match the naming convention.", column: 1, line: 1 }
             ]
         }
     ]
