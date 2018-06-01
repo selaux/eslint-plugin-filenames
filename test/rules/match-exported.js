@@ -7,6 +7,8 @@ var testCode = "var foo = 'bar';",
     exportedJsxClassCode = "module.exports = class Foo { render() { return <span>Test Class</span>; } };",
     exportedClassCode = "module.exports = class Foo {};",
     exportedFunctionCode = "module.exports = function foo() {};",
+    exportUnnamedFunctionCode = "module.exports = function() {};",
+    exportedCalledFunctionCode = "module.exports = foo();",
     exportedJsxFunctionCode = "module.exports = function foo() { return <span>Test Fn</span> };",
     exportedEs6VariableCode = "export default exported;",
     exportedEs6ClassCode = "export default class Foo {};",
@@ -31,12 +33,16 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
             filename: "<input>"
         },
         {
+            code: exportUnnamedFunctionCode,
+            filename: "testFile.js"
+        },
+        {
             code: testCode,
             filename: "/some/dir/exported.js"
         },
         {
             code: testCallCode,
-            filename: "/some/dir/exported.js",
+            filename: "/some/dir/foo.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
@@ -55,6 +61,10 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
         },
         {
             code: exportedFunctionCode,
+            filename: "/some/dir/foo.js"
+        },
+        {
+            code: exportedCalledFunctionCode,
             filename: "/some/dir/foo.js"
         },
         {
@@ -137,6 +147,13 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
         },
         {
             code: exportedFunctionCode,
+            filename: "/some/dir/bar.js",
+            errors: [
+                { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
+            ]
+        },
+        {
+            code: exportedCalledFunctionCode,
             filename: "/some/dir/bar.js",
             errors: [
                 { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
