@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-filenames",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Eslint rule for consistent filenames.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,6 @@
     "lodash.snakecase": "4.1.1",
     "lodash.upperfirst": "4.3.1"
   },
-
   "devDependencies": {
     "chai": "3.5.0",
     "coveralls": "2.13.0",

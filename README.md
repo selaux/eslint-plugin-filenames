@@ -104,12 +104,29 @@ Now, in your code:
 export default function variableName;
 ```
 
+If you also want to match exported function calls you can use the third option (a boolean flag).
+
+```json
+"filenames/match-exported": [ 2, null, null, true ]
+```
+
+Now, in your code:
+
+```js
+// Considered problem only if file isn't named functionName.js or functionName/index.js
+export default functionName();
+```
+
 ### Don't allow index.js files (no-index)
 
 Having a bunch of `index.js` files can have negative influence on developer experience, e.g. when
 opening files by name. When enabling this rule. `index.js` files will always be considered a problem.
 
 ## Changelog
+
+#### 1.3.1
+
+- Put breaking change from `1.3.0` behind a flag
 
 #### 1.3.0
 

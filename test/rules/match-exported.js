@@ -65,7 +65,7 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
         },
         {
             code: exportedCalledFunctionCode,
-            filename: "/some/dir/foo.js"
+            filename: "/some/dir/bar.js"
         },
         {
             code: exportedJsxFunctionCode,
@@ -147,13 +147,6 @@ ruleTester.run("lib/rules/match-exported", exportedRule, {
         },
         {
             code: exportedFunctionCode,
-            filename: "/some/dir/bar.js",
-            errors: [
-                { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
-            ]
-        },
-        {
-            code: exportedCalledFunctionCode,
             filename: "/some/dir/bar.js",
             errors: [
                 { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
@@ -295,6 +288,11 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             filename: "/some/dir/Foo.react.js",
             parserOptions: { ecmaVersion: 6, sourceType: "module", ecmaFeatures: { jsx: true } },
             options: [null, "\\.react$"]
+        },
+        {
+            code: exportedCalledFunctionCode,
+            filename: "/some/dir/foo.js",
+            options: [null, null, true]
         }
     ],
 
@@ -360,6 +358,14 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             errors: [
                 { message: "The directory 'Foo.react' must be named 'Foo', after the exported value of its index file.", column: 1, line: 1 }
             ]
+        },
+        {
+            code: exportedCalledFunctionCode,
+            filename: "/some/dir/bar.js",
+            errors: [
+                { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
+            ],
+            options: [null, null, true]
         }
     ]
 });
