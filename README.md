@@ -43,7 +43,8 @@ exporting files can be ignored with a second configuration parameter.
 
 With these configuration options, `camelCase.js` will be reported as an error while `snake_case.js` will pass.
 Additionally the files that have a named default export (according to the logic in the `match-exported` rule) will be
-ignored.  They could be linted with the `match-exported` rule.
+ignored.  They could be linted with the `match-exported` rule. Please note that exported function calls are not
+respected in this case.
 
 ### Matching Exported Values (match-exported)
 
@@ -123,6 +124,10 @@ Having a bunch of `index.js` files can have negative influence on developer expe
 opening files by name. When enabling this rule. `index.js` files will always be considered a problem.
 
 ## Changelog
+
+#### 1.3.2
+
+- Fix issue with `match-regex` and `getExportedName`
 
 #### 1.3.1
 
