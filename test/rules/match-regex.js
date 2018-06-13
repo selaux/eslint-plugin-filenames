@@ -2,6 +2,7 @@ var regexRule = require("../../lib/rules/match-regex"),
     RuleTester = require("eslint").RuleTester;
 
 var exportingCode = 'module.exports = foo',
+    exportedFunctionCall = 'module.exports = foo()',
     testCode = "var foo = 'bar';",
     ruleTester = new RuleTester();
 
@@ -50,6 +51,11 @@ ruleTester.run("lib/rules/match-regex", regexRule, {
             code: exportingCode,
             filename: "fooBar.js",
             options: [ "^[a-z_]$", true ]
+        },
+        {
+            code: exportedFunctionCall,
+            filename: "foo_bar.js",
+            options: [ "^[a-z_]+$", true ]
         }
     ],
 
