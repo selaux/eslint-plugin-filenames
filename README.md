@@ -81,8 +81,9 @@ export default function variableName;
 Available transforms:
 '[snake](https://www.npmjs.com/package/lodash.snakecase)',
 '[kebab](https://www.npmjs.com/package/lodash.kebabcase)',
-'[camel](https://www.npmjs.com/package/lodash.camelcase)', and
-'pascal' (camel-cased with first letter in upper case).
+'[camel](https://www.npmjs.com/package/lodash.camelcase)',
+'pascal' (camel-cased with first letter in upper case), and
+'[dot](https://www.npmjs.com/package/dot-case)'.
 
 For multiple transforms simply specify an array like this (null in this case stands for no transform):
 
