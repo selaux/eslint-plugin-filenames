@@ -118,6 +118,19 @@ Now, in your code:
 export default functionName();
 ```
 
+Finally, if you do not want the exports of an `index.js` to be compared against the parent directory, you can provide a fourth option (a boolean flag).
+
+```json
+"filenames/match-exported": [ 2, null, null, null, true ]
+```
+
+Now, in your code:
+
+```js
+// Considered problem only if file isn't named variableName.js. However, foo/index.js is fine.
+export default variableName;
+```
+
 ### Don't allow index.js files (no-index)
 
 Having a bunch of `index.js` files can have negative influence on developer experience, e.g. when

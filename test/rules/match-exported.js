@@ -293,6 +293,11 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
             code: exportedCalledFunctionCode,
             filename: "/some/dir/foo.js",
             options: [null, null, true]
+        },
+        {
+            code: exportedVariableCode,
+            filename: "/some/dir/index.js",
+            options: [null, null, null, true] // directory need not match export from index.js
         }
     ],
 
@@ -366,6 +371,14 @@ ruleTester.run("lib/rules/match-exported with configuration", exportedRule, {
                 { message: "Filename 'bar' must match the exported name 'foo'.", column: 1, line: 1 }
             ],
             options: [null, null, true]
+        },
+        {
+            code: exportedVariableCode,
+            filename: "/some/dir/index.js",
+            errors: [
+                { message: "The directory 'dir' must be named 'exported', after the exported value of its index file.", column: 1, line: 1 }
+            ],
+            options: [null, null, null, false] // directory must match export from index.js
         }
     ]
 });
