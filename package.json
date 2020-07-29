@@ -12,6 +12,7 @@
     "coveralls": "cat ./build/coverage/lcov.info | coveralls"
   },
   "dependencies": {
+    "dot-case": "2.1.1",
     "lodash.camelcase": "4.3.0",
     "lodash.kebabcase": "4.1.1",
     "lodash.snakecase": "4.1.1",
