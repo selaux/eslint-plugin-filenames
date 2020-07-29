@@ -88,6 +88,14 @@ ruleTester.run("lib/rules/match-regex", regexRule, {
             errors: [
                 { message: "Filename 'fooBar.js' does not match the naming convention.", column: 1, line: 1 }
             ]
+        },
+        {
+            code: testCode,
+            filename: "fooBar.js",
+            options: [ "^[a-z_]$", false, "Custom error message." ],
+            errors: [
+                { message: "Custom error message.", column: 1, line: 1 }
+            ]
         }
     ]
 });
