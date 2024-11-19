@@ -1,6 +1,6 @@
 # eslint-plugin-filenames
 
-__This project is no longer actively maintained__
+__This project is no longer actively maintained. Please consider using [ls-lint](https://github.com/loeffel-io/ls-lint) as reliable alternative.__
 
 [![NPM Version](https://img.shields.io/npm/v/eslint-plugin-filenames.svg?style=flat-square)](https://www.npmjs.org/package/eslint-plugin-filenames)
 [![Build Status](https://img.shields.io/travis/selaux/eslint-plugin-filenames.svg?style=flat-square)](https://travis-ci.org/selaux/eslint-plugin-filenames)
